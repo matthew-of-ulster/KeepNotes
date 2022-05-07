@@ -1,7 +1,7 @@
 
 public class Note {
 	
-	private String[] color;
+	private String color;
 	private boolean trashed;
 	private boolean pinned;
 	private boolean archived;
@@ -14,17 +14,39 @@ public class Note {
 	
 	public Note(String input) {
 		super();
-		String[] details = input.split(",");
-		
-		//If the text content includes a comma the array will split into more than 8 values
-		if(details.length>8){
+		String[] details=input.split(",");
+        if(details.length>8){
 			int over = details.length-8;
 			for(int i=0;i<over;i++) {
 				details[4]+=details[4+i];
 				for(int j=0;j<over;j++) {
-					details[4+j]=details[4+(j+1)];
+					details[5+j]=details[6+j];
 				}
 			}
+			details[6]=details[details.length-2];
+			details[7]=details[details.length-1];
+			
+			String[] shrinkArray=new String[8];
+			
+			for(int i=0;i<shrinkArray.length;i++) {
+				shrinkArray[i] = details[i];
+			}
+			System.out.println(input);
+			for(String s:details) {
+				System.out.println(s);
+			}
+			System.out.println();
+			
+			details=shrinkArray;
+			
+			title = details[0];
+			if(details[0].split(":")[1].equals("{\"attachments\"")){
+					color = "\"Weird\"";
+			}else {
+			color = details[0].split(":")[1];
+			}
+			trashed = Boolean.parseBoolean(details[1].split(":")[1]);
+			
 		}
 		
 		//{"color":"BROWN","isTrashed":false,"isPinned":false,"isArchived":false,"textContent":"Action\n-alert\n-nalert\n-accept\n-naccept\n-com\n-ncom\n\nStatus\n-na\n-def\n-ndef\n-auth\n-nauth\n-healthy\n-nhealthy\n\nMasurement\n-na\n-PR\n-RR\n-DA\n-IR\n-DR\n\n","title":"All outputs from simulator","userEditedTimestampUsec":1616694948530000,"createdTimestampUsec":1616694189610000}
