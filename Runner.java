@@ -41,7 +41,7 @@ public class Runner {
 		        for(Note n:noteList) {
 		        	//System.out.println(n.getTitle());
 		        	//System.out.println(n.getColor() + " "+ n.isTrashed());
-		        	System.out.println();
+		        	//System.out.println();
 		        }
 		        //System.out.println();
 		    }
